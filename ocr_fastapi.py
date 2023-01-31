@@ -1,8 +1,8 @@
 from uvicorn import run
-from fastapi import FastAPI, Query
+from fastapi import FastAPI
 from typing import Optional
 
-from ocr_cmd import ocr_project
+from ocr import OCR
 
 app = FastAPI(
     swagger_ui_parameters={"defaultModelsExpandDepth": -1},
@@ -13,7 +13,8 @@ app = FastAPI(
 
 @app.get("/")
 def home(file_path: Optional[str] = None):
-    return ocr_project(file_path)
+    ocr_tool = OCR()
+    return ocr_tool.run_ocr(file_path)
 
 
 if __name__ == "__main__":
