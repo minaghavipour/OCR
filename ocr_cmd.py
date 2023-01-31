@@ -25,16 +25,17 @@ def ocr_project(input_file):
     # print(pytesseract.get_languages(config=''))
     path, file_name = os.path.split(input_file)
     file_basename, file_extension = os.path.splitext(file_name)
-    with open('ocr_result.txt', 'w') as f:
+    with open(os.path.join(path, "ocr_result.txt"), 'w') as f:
         if file_extension == '.pdf':
             ocr_text = pdf_to_str(input_file)
         else:
             ocr_text = img_to_str(input_file)
         f.write(ocr_text)
+    return ocr_text
 
 
-if len(sys.argv) == 2:
-    ocr_project(sys.argv[1])
-else:
-    print('Please run the code in this format: main.py  [path to your img-file]')
-    exit(-1)
+# if len(sys.argv) == 2:
+#     ocr_project(sys.argv[1])
+# else:
+#     print('Please run the code in this format: main.py  [path to your img-file]')
+#     exit(-1)
